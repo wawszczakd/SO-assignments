@@ -9,13 +9,10 @@ all: example
 core.o: core.asm
 	nasm -DN=2 -f elf64 -w+all -w+error -o core.o core.asm
 
-test: core.o test.o test.c
-	$(CC) -z noexecstack -o test core.o test.o -lpthread
-
 example: core.o example.o example.c
 	$(CC) -z noexecstack -o example core.o example.o -lpthread
 
 clean:
-	-rm -f *.o test example
+	-rm -f *.o example
 
 .PHONY: all clean
